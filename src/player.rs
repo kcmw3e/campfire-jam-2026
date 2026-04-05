@@ -28,6 +28,27 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     ));
 }
 
+/// Returns a direction vector based on the currently pressed movement keys (WASD or arrow keys)
+fn get_direction(keyboard: Res<ButtonInput<KeyCode>>) -> Vec3 {
+    let mut direction = Vec3::ZERO;
+
+    if keyboard.pressed(KeyCode::KeyA) || keyboard.pressed(KeyCode::ArrowLeft) {
+        direction.x -= 1.;
+    }
+    if keyboard.pressed(KeyCode::KeyD) || keyboard.pressed(KeyCode::ArrowRight)
+    {
+        direction.x += 1.;
+    }
+    if keyboard.pressed(KeyCode::KeyW) || keyboard.pressed(KeyCode::ArrowUp) {
+        direction.y += 1.;
+    }
+    if keyboard.pressed(KeyCode::KeyS) || keyboard.pressed(KeyCode::ArrowDown) {
+        direction.y -= 1.;
+    }
+
+    direction
+}
+
 pub fn movement(
     keyboard: Res<ButtonInput<KeyCode>>,
     time: Res<Time>,
@@ -61,28 +82,14 @@ pub fn movement(
         return;
     };
 
-    let mut direction = Vec3::ZERO;
 
-    if keyboard.pressed(KeyCode::KeyA) || keyboard.pressed(KeyCode::ArrowLeft) {
-        direction.x -= 1.0;
-    }
-    if keyboard.pressed(KeyCode::KeyD) || keyboard.pressed(KeyCode::ArrowRight)
-    {
-        direction.x += 1.0;
-    }
-    if keyboard.pressed(KeyCode::KeyW) || keyboard.pressed(KeyCode::ArrowUp) {
-        direction.y += 1.0;
-    }
-    if keyboard.pressed(KeyCode::KeyS) || keyboard.pressed(KeyCode::ArrowDown) {
-        direction.y -= 1.0;
-    }
-
+    let direction = get_direction(keyboard);
     if direction == Vec3::ZERO {
         return;
     }
 
-    direction = direction.normalize_or_zero();
-    let movement = direction * PLAYER_SPEED * time.delta_secs();
+    let movement =
+        direction.normalize_or_zero() * PLAYER_SPEED * time.delta_secs();
 
     let x_limit = (window_width / 2.0) - EDGE_BUFFER;
     let y_limit = (window_height / 2.0) - EDGE_BUFFER;
