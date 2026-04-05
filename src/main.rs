@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use bevy_easy_gif::*;
 
+pub mod background;
 pub mod campfire;
 pub mod campsite;
 mod campsite_forest_entrance;

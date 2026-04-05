@@ -1,11 +1,13 @@
 use bevy::prelude::*;
 
+use crate::background::*;
 use crate::y_sort::*;
 
 #[derive(Component)]
+#[component(on_add = on_add_background)]
 pub struct Campsite;
 
-pub const CAMPSITE_SIZE: Vec2 = Vec2::new(3000., 1650.);
+pub const CAMPSITE_SIZE: Vec2 = BACKGROUND_SIZE;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((

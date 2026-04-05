@@ -1,11 +1,14 @@
 use bevy::prelude::*;
 
+use crate::GameState;
+use crate::background::*;
 use crate::campsite::*;
 use crate::player::*;
 use crate::y_sort::*;
 
 #[derive(Component)]
-pub struct Entrance;
+#[component(on_add = on_add_background)]
+pub struct CFEntrance;
 
 pub const ENTRANCE_SIZE: Vec2 = Vec2::new(75., 125.);
 pub const C_F_ENTRANCE_POS: Vec2 =
@@ -21,19 +24,19 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             },
             Transform::from_xyz(C_F_ENTRANCE_POS.x, C_F_ENTRANCE_POS.y, 0.),
         ),
-        Entrance,
-        Campsite,
+        CFEntrance,
         YSort { z: 1. },
     ));
     print!(
-        "Entrance position: ({}, {})",
+        "CFEntrance position: ({}, {})",
         C_F_ENTRANCE_POS.x, C_F_ENTRANCE_POS.y
     );
 }
 
 pub fn check_entrance(
     player_query: Query<&Transform, With<Player>>,
-    entrance_query: Query<&Transform, With<Entrance>>,
+    entrance_query: Query<&Transform, With<CFEntrance>>,
+    mut next_state: ResMut<NextState<GameState>>,
 ) {
     let Ok(player_transform) = player_query.single() else {
         return;
@@ -51,6 +54,15 @@ pub fn check_entrance(
         < half_entrance.y;
 
     if in_x && in_y {
-        println!("Player entered the forest entrance!");
+        next_state.set(GameState::Forest);
+    }
+}
+
+pub fn teardown(
+    mut commands: Commands,
+    query: Query<Entity, With<CFEntrance>>,
+) {
+    for entity in query.iter() {
+        commands.entity(entity).despawn();
     }
 }
