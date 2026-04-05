@@ -18,3 +18,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         YSort { z: 10. },
     ));
 }
+
+pub fn teardown(mut commands: Commands, query: Query<Entity, With<Campfire>>) {
+    for entity in query.iter() {
+        commands.entity(entity).despawn();
+    }
+}
+

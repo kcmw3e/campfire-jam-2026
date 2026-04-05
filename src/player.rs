@@ -4,6 +4,7 @@ use bevy::window::PrimaryWindow;
 
 use crate::campfire::*;
 use crate::campsite::*;
+use crate::forest::*;
 use crate::y_sort::*;
 
 #[derive(Component)]
