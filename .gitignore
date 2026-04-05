@@ -1,2 +1,5 @@
 # Rust build artifacts
 target/
+
+# Developer environment
+.env
