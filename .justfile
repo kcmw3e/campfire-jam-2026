@@ -8,11 +8,15 @@ default:
     @just --list --unsorted --justfile {{justfile()}}
 
 alias b := build
+alias r := run
 alias t := test
 alias c := clean
 
 build:
     cargo build
+
+run:
+    cargo run
 
 test:
     cargo test
