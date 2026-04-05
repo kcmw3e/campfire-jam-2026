@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_easy_gif::*;
 
-mod campfire;
+pub mod campfire;
 pub mod campsite;
 mod player;
 
