@@ -1,0 +1,20 @@
+[package]
+name = "project-campfire"
+authors = ["Casey Walker", "Grace Xin"]
+version = "0.0.0"
+edition = "2024"
+description = "A game for the Campfire Creators Jam 2026"
+readme = "readme"
+
+[dependencies]
+bevy = { version = "0.18.1", features = ["wayland"] }
+
+# Enable some optimization in the `dev` profile to speed up the game during
+# development without sacrificing too much debug-ability.
+[profile.dev]
+opt-level = 1
+
+# Enable a lot more optimization in the `dev` profile for dependencies since
+# they can be assumed to work correctly.
+[profile.dev.package."*"]
+opt-level = 3
