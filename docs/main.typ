@@ -27,3 +27,13 @@ As a minimum for submission, we are planning to implement the following:
 - environments for the player to travel between
   - the campsite (where teh fire is located)
   - a forest, where sticks and logs can be gathered
+
+=== General tasks that can be parallelized
+
+In general, we will can divide the work into the following parallelizable
+  categories:
+
+- campfire meter HUD
+- player interaction, such as moving and picking up items
+- building and setting up the campfire/environments
+- inventory mechanism
