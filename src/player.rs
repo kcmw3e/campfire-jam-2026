@@ -10,7 +10,7 @@ use crate::y_sort::*;
 pub struct Player;
 
 const PLAYER_SPEED: f32 = 300.;
-const PLAYER_SIZE: Vec2 = Vec2::new(30., 50.);
+pub const PLAYER_SIZE: Vec2 = Vec2::new(30., 50.);
 const EDGE_BUFFER: f32 = 200.;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -113,11 +113,13 @@ pub fn movement(
     let Ok(mut campfire_transform) = campfire_query.single_mut() else {
         return;
     };
-    let Ok(mut campsite_transform) = campsite_query.single_mut() else {
+    // TODO: Find a better way to get the campsite transform without assuming it's the first
+    let Some(campsite_transform) = campsite_query.iter_mut().nth(0) else {
         return;
     };
 
     let half_screen = Vec2::new(window.width(), window.height()) / 2.;
+    // TODO: Once forest env is added, this will need to be dynamically set based on current map
     let half_site = CAMPSITE_SIZE / 2.;
     let limit = half_screen - Vec2::splat(EDGE_BUFFER);
 
@@ -155,6 +157,8 @@ pub fn movement(
     player_transform.translation.y += pdy;
     campfire_transform.translation.x += wdx;
     campfire_transform.translation.y += wdy;
-    campsite_transform.translation.x += wdx;
-    campsite_transform.translation.y += wdy;
+    for mut campsite_transform in campsite_query.iter_mut() {
+        campsite_transform.translation.x += wdx;
+        campsite_transform.translation.y += wdy;
+    }
 }
