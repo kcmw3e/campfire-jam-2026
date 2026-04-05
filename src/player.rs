@@ -1,8 +1,10 @@
 use bevy::prelude::*;
+use bevy::sprite::Anchor;
 use bevy::window::PrimaryWindow;
 
 use crate::campfire::*;
 use crate::campsite::*;
+use crate::y_sort::*;
 
 #[derive(Component)]
 pub struct Player;
@@ -18,9 +20,11 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 image: asset_server.load("person.png"),
                 ..default()
             },
+            Anchor::BOTTOM_CENTER,
             Transform::from_xyz(-50., 0., 0.),
         ),
         Player,
+        YSort { z: 10. },
     ));
 }
 

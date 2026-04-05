@@ -4,6 +4,7 @@ use bevy_easy_gif::*;
 pub mod campfire;
 pub mod campsite;
 mod player;
+pub mod y_sort;
 
 fn main() {
     App::new()
@@ -14,6 +15,7 @@ fn main() {
         .add_systems(Startup, campfire::setup)
         .add_systems(Startup, player::setup)
         .add_systems(Update, player::movement)
+        .add_systems(Update, y_sort::y_sort)
         .run();
 }
 
