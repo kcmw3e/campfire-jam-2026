@@ -13,11 +13,14 @@ alias b := build
 alias t := test
 alias c := clean
 
+
 build:
     cargo build
 
+
 test:
     cargo test
+
 
 clean:
     cargo clean
