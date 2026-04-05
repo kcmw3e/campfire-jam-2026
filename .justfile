@@ -7,6 +7,8 @@
 default:
     @just --list --unsorted --justfile {{justfile()}}
 
+set dotenv-load := true
+
 alias b := build
 alias t := test
 alias c := clean
