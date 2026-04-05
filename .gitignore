@@ -1,6 +1,10 @@
-# Rust build artifacts
+# Build artifacts
 target/
+build/
 
-# Windows-specific setup stuff
+# Developer environment
+.env
+
+# Windows-specific dev setup
 win.sh
 *.exe
