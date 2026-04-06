@@ -20,7 +20,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         (
             Sprite {
                 custom_size: Some(PLAYER_SIZE),
-                image: asset_server.load("person.png"),
+                image: asset_server.load("player.png"),
                 ..default()
             },
             Anchor::BOTTOM_CENTER,
