@@ -6,6 +6,7 @@ pub mod campfire;
 pub mod campsite;
 mod campsite_forest_entrance;
 pub mod forest;
+pub mod movement;
 pub mod player;
 pub mod y_sort;
 
@@ -21,6 +22,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugins(GifPlugin)
         .init_state::<GameState>()
+        .init_resource::<movement::KeyBinds>()
         .add_systems(Startup, setup)
         .add_systems(Startup, player::setup)
         .add_systems(FixedUpdate, player::movement)
