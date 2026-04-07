@@ -24,25 +24,27 @@ fn main() {
         .init_state::<GameState>()
         .init_resource::<keyboard::KeyBinds>()
         .add_systems(Startup, setup)
-        .add_systems(Startup, player::setup)
-        .add_systems(FixedUpdate, player::movement)
-        .add_systems(FixedUpdate, campsite_forest_entrance::check_entrance)
-        .add_systems(Update, y_sort::y_sort)
-        .add_systems(Update, handle_quit)
+        .add_systems(Startup, player::setup.after(setup))
         .add_systems(OnEnter(GameState::Forest), forest::setup)
-        .add_systems(OnEnter(GameState::Campsite), campsite::setup)
-        .add_systems(OnEnter(GameState::Campsite), campfire::setup)
         .add_systems(
             OnEnter(GameState::Campsite),
-            campsite_forest_entrance::setup,
+            (campsite::setup, campfire::setup, campsite_forest_entrance::setup),
         )
         .add_systems(OnExit(GameState::Forest), forest::teardown)
-        .add_systems(OnExit(GameState::Campsite), campsite::teardown)
-        .add_systems(OnExit(GameState::Campsite), campfire::teardown)
         .add_systems(
             OnExit(GameState::Campsite),
-            campsite_forest_entrance::teardown,
+            (
+                campsite::teardown,
+                campfire::teardown,
+                campsite_forest_entrance::teardown,
+            ),
         )
+        .add_systems(
+            FixedUpdate,
+            (player::movement, campsite_forest_entrance::check_entrance)
+                .after(player::setup),
+        )
+        .add_systems(Update, (y_sort::y_sort, handle_quit).after(player::setup))
         .run();
 }
 
