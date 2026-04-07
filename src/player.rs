@@ -39,16 +39,16 @@ fn get_direction(
 ) -> Vec3 {
     let mut direction = Vec3::ZERO;
 
-    if key_binds.left.iter().any(|k| keyboard.pressed(*k)) {
+    if key_binds.left(&keyboard) {
         direction.x -= 1.;
     }
-    if key_binds.right.iter().any(|k| keyboard.pressed(*k)) {
+    if key_binds.right(&keyboard) {
         direction.x += 1.;
     }
-    if key_binds.up.iter().any(|k| keyboard.pressed(*k)) {
+    if key_binds.up(&keyboard) {
         direction.y += 1.;
     }
-    if key_binds.down.iter().any(|k| keyboard.pressed(*k)) {
+    if key_binds.down(&keyboard) {
         direction.y -= 1.;
     }
 

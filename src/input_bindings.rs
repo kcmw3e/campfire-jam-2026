@@ -20,3 +20,29 @@ impl Default for KeyBinds {
         }
     }
 }
+
+impl KeyBinds {
+    fn any_pressed(
+        &self,
+        keys: &[KeyCode],
+        input: &ButtonInput<KeyCode>,
+    ) -> bool {
+        keys.iter().any(|k| input.pressed(*k))
+    }
+
+    pub fn left(&self, input: &ButtonInput<KeyCode>) -> bool {
+        self.any_pressed(&self.left, input)
+    }
+    pub fn right(&self, input: &ButtonInput<KeyCode>) -> bool {
+        self.any_pressed(&self.right, input)
+    }
+    pub fn up(&self, input: &ButtonInput<KeyCode>) -> bool {
+        self.any_pressed(&self.up, input)
+    }
+    pub fn down(&self, input: &ButtonInput<KeyCode>) -> bool {
+        self.any_pressed(&self.down, input)
+    }
+    pub fn quit(&self, input: &ButtonInput<KeyCode>) -> bool {
+        self.any_pressed(&self.quit, input)
+    }
+}
