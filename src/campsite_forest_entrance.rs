@@ -41,8 +41,8 @@ pub fn check_entrance(
         return;
     };
 
-    let player_pos = player_transform.translation.truncate();
-    let entrance_pos = entrance_transform.translation.truncate();
+    let player_pos = player_transform.translation;
+    let entrance_pos = entrance_transform.translation;
 
     let half_entrance = ENTRANCE_SIZE / 2.;
     let in_x = (player_pos.x - entrance_pos.x).abs() < half_entrance.x;
