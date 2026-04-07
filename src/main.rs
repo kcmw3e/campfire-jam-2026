@@ -27,6 +27,7 @@ fn main() {
         .add_systems(Startup, player::setup)
         .add_systems(FixedUpdate, player::movement)
         .add_systems(FixedUpdate, campsite_forest_entrance::check_entrance)
+        .add_systems(Update, movement::keyboard_events)
         .add_systems(Update, y_sort::y_sort)
         .add_systems(OnEnter(GameState::Forest), forest::setup)
         .add_systems(OnEnter(GameState::Campsite), campsite::setup)

@@ -7,7 +7,11 @@ description = "A game for the Campfire Creators Jam 2026"
 readme = "readme"
 
 [dependencies]
-bevy = { version = "0.18.1", features = ["bevy_debug_stepping", "wayland"] }
+bevy = { version = "0.18.1", features = [
+    "bevy_debug_stepping",
+    "keyboard",
+    "wayland",
+] }
 bevy_easy_gif = "0.3.0"
 
 # Enable some optimization in the `dev` profile to speed up the game during
