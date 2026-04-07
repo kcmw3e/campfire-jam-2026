@@ -4,3 +4,7 @@ build/
 
 # Developer environment
 .env
+
+# Windows-specific dev setup
+win.sh
+*.exe
