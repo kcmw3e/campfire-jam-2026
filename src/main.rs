@@ -6,7 +6,7 @@ pub mod campfire;
 pub mod campsite;
 mod campsite_forest_entrance;
 pub mod forest;
-pub mod movement;
+pub mod keyboard;
 pub mod player;
 pub mod y_sort;
 
@@ -22,12 +22,12 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugins(GifPlugin)
         .init_state::<GameState>()
-        .init_resource::<movement::KeyBinds>()
+        .init_resource::<keyboard::KeyBinds>()
         .add_systems(Startup, setup)
         .add_systems(Startup, player::setup)
         .add_systems(FixedUpdate, player::movement)
         .add_systems(FixedUpdate, campsite_forest_entrance::check_entrance)
-        .add_systems(Update, movement::keyboard_events)
+        .add_systems(Update, keyboard::keyboard_events)
         .add_systems(Update, y_sort::y_sort)
         .add_systems(OnEnter(GameState::Forest), forest::setup)
         .add_systems(OnEnter(GameState::Campsite), campsite::setup)
@@ -48,4 +48,13 @@ fn main() {
 
 fn setup(mut commands: Commands) {
     commands.spawn(Camera2d::default());
+}
+
+pub fn handle_quit(
+    keyboard: Res<ButtonInput<KeyCode>>,
+    binds: Res<keyboard::KeyBinds>,
+) {
+    if binds.quit.iter().any(|k| keyboard.just_pressed(*k)) {
+        std::process::exit(0);
+    }
 }

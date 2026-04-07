@@ -6,7 +6,7 @@ use crate::GameState;
 use crate::background::*;
 use crate::campsite::*;
 use crate::forest::*;
-use crate::movement::*;
+use crate::keyboard::*;
 use crate::y_sort::*;
 
 #[derive(Component)]

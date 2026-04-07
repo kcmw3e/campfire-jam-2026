@@ -21,13 +21,3 @@ impl Default for KeyBinds {
         }
     }
 }
-
-pub fn keyboard_events(mut events: MessageReader<KeyboardInput>) {
-    for event in events.read() {
-        for quit_key in KeyBinds::default().quit {
-            if event.key_code == quit_key && event.state.is_pressed() {
-                std::process::exit(0);
-            }
-        }
-    }
-}
