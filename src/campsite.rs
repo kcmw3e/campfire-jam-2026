@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::y_sort::*;
+
 #[derive(Component)]
 pub struct Campsite;
 
@@ -10,5 +12,6 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             Transform::from_xyz(0., 0., 0.),
         ),
         Campsite,
+        YSort { z: 0. },
     ));
 }

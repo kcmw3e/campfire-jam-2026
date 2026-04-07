@@ -1,8 +1,10 @@
 use bevy::prelude::*;
+use bevy::sprite::Anchor;
 use bevy::window::PrimaryWindow;
 
 use crate::campfire::*;
 use crate::campsite::*;
+use crate::y_sort::*;
 
 #[derive(Component)]
 pub struct Player;
@@ -13,10 +15,16 @@ const EDGE_BUFFER: f32 = 200.0;
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
         (
-            Sprite::from_image(asset_server.load("person.png")),
-            Transform::from_xyz(0., 0., 1.),
+            Sprite {
+                custom_size: Some(Vec2::new(30., 50.)),
+                image: asset_server.load("person.png"),
+                ..default()
+            },
+            Anchor::BOTTOM_CENTER,
+            Transform::from_xyz(-50., 0., 0.),
         ),
         Player,
+        YSort { z: 10. },
     ));
 }
 
