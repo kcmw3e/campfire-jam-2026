@@ -1,8 +1,8 @@
 use bevy::prelude::*;
 
-use crate::background::*;
-use crate::constants::*;
-use crate::y_sort::*;
+use crate::background::{BACKGROUND_SIZE, on_add_background};
+use crate::constants::{DEFAULT_POS, DEFAULT_Z, Z_INDEX};
+use crate::y_sort::YSort;
 
 #[derive(Component)]
 #[component(on_add = on_add_background)]

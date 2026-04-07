@@ -3,12 +3,12 @@ use bevy::sprite::Anchor;
 use bevy::window::PrimaryWindow;
 
 use crate::GameState;
-use crate::background::*;
-use crate::campsite::*;
-use crate::constants::*;
-use crate::forest::*;
-use crate::input_bindings::*;
-use crate::y_sort::*;
+use crate::background::{BACKGROUND_SIZE, Background};
+use crate::campsite::Campsite;
+use crate::constants::{DEFAULT_POS, DEFAULT_Z, Z_INDEX};
+use crate::forest::Forest;
+use crate::input_bindings::KeyBinds;
+use crate::y_sort::YSort;
 
 #[derive(Component)]
 pub struct Player;

@@ -1,11 +1,11 @@
 use bevy::prelude::*;
 
 use crate::GameState;
-use crate::background::*;
-use crate::campsite::*;
-use crate::constants::*;
-use crate::player::*;
-use crate::y_sort::*;
+use crate::background::on_add_background;
+use crate::campsite::CAMPSITE_SIZE;
+use crate::constants::{DEFAULT_Z, Z_INDEX};
+use crate::player::{PLAYER_SIZE, Player};
+use crate::y_sort::YSort;
 
 #[derive(Component)]
 #[component(on_add = on_add_background)]

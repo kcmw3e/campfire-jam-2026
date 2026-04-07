@@ -2,9 +2,9 @@ use bevy::prelude::*;
 use bevy::sprite::Anchor;
 use bevy_easy_gif::*;
 
-use crate::background::*;
-use crate::constants::*;
-use crate::y_sort::*;
+use crate::background::on_add_background;
+use crate::constants::{DEFAULT_POS, DEFAULT_Z, Z_INDEX};
+use crate::y_sort::YSort;
 
 #[derive(Component)]
 #[component(on_add = on_add_background)]
