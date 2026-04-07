@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 use crate::background::*;
+use crate::constants::*;
 use crate::y_sort::*;
 
 #[derive(Component)]
@@ -17,10 +18,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 image: asset_server.load("forest_bg.png"),
                 ..default()
             },
-            Transform::from_xyz(0., 0., 0.),
+            Transform::from_translation(DEFAULT_POS.extend(DEFAULT_Z)),
         ),
         Forest,
-        YSort { z: 0. },
+        YSort { z: Z_INDEX.bg },
     ));
 }
 

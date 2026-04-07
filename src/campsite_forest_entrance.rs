@@ -3,6 +3,7 @@ use bevy::prelude::*;
 use crate::GameState;
 use crate::background::*;
 use crate::campsite::*;
+use crate::constants::*;
 use crate::player::*;
 use crate::y_sort::*;
 
@@ -22,10 +23,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 image: asset_server.load("campsite_forest_entrance.png"),
                 ..default()
             },
-            Transform::from_xyz(C_F_ENTRANCE_POS.x, C_F_ENTRANCE_POS.y, 0.),
+            Transform::from_translation(C_F_ENTRANCE_POS.extend(DEFAULT_Z)),
         ),
         CFEntrance,
-        YSort { z: 1. },
+        YSort { z: Z_INDEX.mg },
     ));
 }
 

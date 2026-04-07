@@ -5,6 +5,7 @@ use bevy::window::PrimaryWindow;
 use crate::GameState;
 use crate::background::*;
 use crate::campsite::*;
+use crate::constants::*;
 use crate::forest::*;
 use crate::input_bindings::*;
 use crate::y_sort::*;
@@ -14,6 +15,7 @@ pub struct Player;
 
 const PLAYER_SPEED: f32 = 500.;
 pub const PLAYER_SIZE: Vec2 = Vec2::new(30., 50.);
+const PLAYER_POS: Vec2 = Vec2::new(-PLAYER_SIZE.x, DEFAULT_POS.y);
 const EDGE_BUFFER: f32 = 200.;
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -25,10 +27,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 ..default()
             },
             Anchor::BOTTOM_CENTER,
-            Transform::from_xyz(-50., 0., 0.),
+            Transform::from_translation(PLAYER_POS.extend(DEFAULT_Z)),
         ),
         Player,
-        YSort { z: 10. },
+        YSort { z: Z_INDEX.mg },
     ));
 }
 

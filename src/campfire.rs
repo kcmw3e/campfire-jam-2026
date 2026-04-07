@@ -3,6 +3,7 @@ use bevy::sprite::Anchor;
 use bevy_easy_gif::*;
 
 use crate::background::*;
+use crate::constants::*;
 use crate::y_sort::*;
 
 #[derive(Component)]
@@ -14,10 +15,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         (
             Gif { handle: asset_server.load("campfire/campfire_preview.gif") },
             Anchor::BOTTOM_CENTER,
-            Transform::from_xyz(0., 0., 0.),
+            Transform::from_translation(DEFAULT_POS.extend(DEFAULT_Z)),
         ),
         Campfire,
-        YSort { z: 10. },
+        YSort { z: Z_INDEX.mg },
     ));
 }
 
@@ -26,4 +27,3 @@ pub fn teardown(mut commands: Commands, query: Query<Entity, With<Campfire>>) {
         commands.entity(entity).despawn();
     }
 }
-
