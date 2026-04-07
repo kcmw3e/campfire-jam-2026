@@ -27,10 +27,6 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         CFEntrance,
         YSort { z: 1. },
     ));
-    print!(
-        "CFEntrance position: ({}, {})",
-        C_F_ENTRANCE_POS.x, C_F_ENTRANCE_POS.y
-    );
 }
 
 pub fn check_entrance(
