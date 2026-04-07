@@ -6,7 +6,7 @@ pub mod campfire;
 pub mod campsite;
 mod campsite_forest_entrance;
 pub mod forest;
-pub mod keyboard;
+pub mod input_bindings;
 pub mod player;
 pub mod y_sort;
 
@@ -22,7 +22,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugins(GifPlugin)
         .init_state::<GameState>()
-        .init_resource::<keyboard::KeyBinds>()
+        .init_resource::<input_bindings::KeyBinds>()
         .add_systems(Startup, setup)
         .add_systems(Startup, player::setup.after(setup))
         .add_systems(OnEnter(GameState::Forest), forest::setup)
@@ -54,7 +54,7 @@ fn setup(mut commands: Commands) {
 
 fn handle_quit(
     keyboard: Res<ButtonInput<KeyCode>>,
-    binds: Res<keyboard::KeyBinds>,
+    binds: Res<input_bindings::KeyBinds>,
 ) {
     if binds.quit.iter().any(|k| keyboard.just_pressed(*k)) {
         std::process::exit(0);
