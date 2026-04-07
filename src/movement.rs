@@ -6,6 +6,7 @@ pub struct KeyBinds {
     pub right: Vec<KeyCode>,
     pub up: Vec<KeyCode>,
     pub down: Vec<KeyCode>,
+    pub quit: Vec<KeyCode>,
 }
 
 impl Default for KeyBinds {
@@ -15,6 +16,7 @@ impl Default for KeyBinds {
             right: vec![KeyCode::KeyD, KeyCode::ArrowRight],
             up: vec![KeyCode::KeyW, KeyCode::ArrowUp],
             down: vec![KeyCode::KeyS, KeyCode::ArrowDown],
+            quit: vec![KeyCode::KeyQ, KeyCode::Escape],
         }
     }
 }
