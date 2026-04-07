@@ -44,7 +44,7 @@ fn main() {
             (player::movement, campsite_forest_entrance::check_entrance)
                 .after(player::setup),
         )
-        .add_systems(Update, (y_sort::y_sort, handle_quit).after(player::setup))
+        .add_systems(Update, (y_sort::y_sort, handle_quit))
         .run();
 }
 
