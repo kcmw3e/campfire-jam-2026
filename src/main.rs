@@ -27,8 +27,8 @@ fn main() {
         .add_systems(Startup, player::setup)
         .add_systems(FixedUpdate, player::movement)
         .add_systems(FixedUpdate, campsite_forest_entrance::check_entrance)
-        .add_systems(Update, keyboard::keyboard_events)
         .add_systems(Update, y_sort::y_sort)
+        .add_systems(Update, handle_quit)
         .add_systems(OnEnter(GameState::Forest), forest::setup)
         .add_systems(OnEnter(GameState::Campsite), campsite::setup)
         .add_systems(OnEnter(GameState::Campsite), campfire::setup)
@@ -50,7 +50,7 @@ fn setup(mut commands: Commands) {
     commands.spawn(Camera2d::default());
 }
 
-pub fn handle_quit(
+fn handle_quit(
     keyboard: Res<ButtonInput<KeyCode>>,
     binds: Res<keyboard::KeyBinds>,
 ) {
