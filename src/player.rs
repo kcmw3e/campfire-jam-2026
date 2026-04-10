@@ -6,6 +6,7 @@ use crate::GameState;
 use crate::background::*;
 use crate::campsite::*;
 use crate::forest::*;
+use crate::input_bindings::*;
 use crate::y_sort::*;
 
 #[derive(Component)]
@@ -20,7 +21,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         (
             Sprite {
                 custom_size: Some(PLAYER_SIZE),
-                image: asset_server.load("person.png"),
+                image: asset_server.load("player.png"),
                 ..default()
             },
             Anchor::BOTTOM_CENTER,
@@ -32,20 +33,22 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 }
 
 /// Returns a direction vector based on the currently pressed movement keys (WASD or arrow keys)
-fn get_direction(keyboard: Res<ButtonInput<KeyCode>>) -> Vec3 {
+fn get_direction(
+    keyboard: Res<ButtonInput<KeyCode>>,
+    key_binds: Res<KeyBinds>,
+) -> Vec3 {
     let mut direction = Vec3::ZERO;
 
-    if keyboard.pressed(KeyCode::KeyA) || keyboard.pressed(KeyCode::ArrowLeft) {
+    if key_binds.left(&keyboard) {
         direction.x -= 1.;
     }
-    if keyboard.pressed(KeyCode::KeyD) || keyboard.pressed(KeyCode::ArrowRight)
-    {
+    if key_binds.right(&keyboard) {
         direction.x += 1.;
     }
-    if keyboard.pressed(KeyCode::KeyW) || keyboard.pressed(KeyCode::ArrowUp) {
+    if key_binds.up(&keyboard) {
         direction.y += 1.;
     }
-    if keyboard.pressed(KeyCode::KeyS) || keyboard.pressed(KeyCode::ArrowDown) {
+    if key_binds.down(&keyboard) {
         direction.y -= 1.;
     }
 
@@ -93,6 +96,7 @@ fn resolve_axis(
 
 pub fn movement(
     keyboard: Res<ButtonInput<KeyCode>>,
+    key_binds: Res<KeyBinds>,
     time: Res<Time>,
     window_query: Query<&Window, With<PrimaryWindow>>,
     game_state: Res<State<GameState>>,
@@ -138,7 +142,7 @@ pub fn movement(
     let half_bg = BACKGROUND_SIZE / 2.;
     let limit = half_screen - Vec2::splat(EDGE_BUFFER);
 
-    let direction = get_direction(keyboard);
+    let direction = get_direction(keyboard, key_binds);
     if direction == Vec3::ZERO {
         return;
     }
