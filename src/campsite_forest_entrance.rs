@@ -1,10 +1,10 @@
 use bevy::prelude::*;
 
 use crate::GameState;
-use crate::background::*;
-use crate::campsite::*;
-use crate::player::*;
-use crate::y_sort::*;
+use crate::background::on_add_background;
+use crate::campsite::CAMPSITE_SIZE;
+use crate::player::{PLAYER_SIZE, Player};
+use crate::y_sort::{DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
 #[component(on_add = on_add_background)]
@@ -22,10 +22,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 image: asset_server.load("campsite_forest_entrance.png"),
                 ..default()
             },
-            Transform::from_xyz(C_F_ENTRANCE_POS.x, C_F_ENTRANCE_POS.y, 0.),
+            Transform::from_translation(C_F_ENTRANCE_POS.extend(DEFAULT_Z)),
         ),
         CFEntrance,
-        YSort { z: 1. },
+        YSort { z: z_indices::MIDGROUND },
     ));
 }
 
