@@ -5,6 +5,8 @@ use bevy_easy_gif::*;
 use crate::background::on_add_background;
 use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
+/// The campfire is the central part of the game that the player must interact
+/// with. It will burn through fuel over time.
 #[derive(Component)]
 #[component(on_add = on_add_background)]
 pub struct Campfire;
