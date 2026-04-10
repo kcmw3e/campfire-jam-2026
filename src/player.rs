@@ -5,10 +5,9 @@ use bevy::window::PrimaryWindow;
 use crate::GameState;
 use crate::background::{BACKGROUND_SIZE, Background};
 use crate::campsite::Campsite;
-use crate::constants::{DEFAULT_POS, DEFAULT_Z, Z_INDEX};
 use crate::forest::Forest;
 use crate::input_bindings::KeyBinds;
-use crate::y_sort::YSort;
+use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
 pub struct Player;
@@ -30,7 +29,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             Transform::from_translation(PLAYER_STARTING_POS.extend(DEFAULT_Z)),
         ),
         Player,
-        YSort { z: Z_INDEX.mg },
+        YSort { z: z_indices::MIDGROUND },
     ));
 }
 

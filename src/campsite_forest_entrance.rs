@@ -3,9 +3,8 @@ use bevy::prelude::*;
 use crate::GameState;
 use crate::background::on_add_background;
 use crate::campsite::CAMPSITE_SIZE;
-use crate::constants::{DEFAULT_Z, Z_INDEX};
 use crate::player::{PLAYER_SIZE, Player};
-use crate::y_sort::YSort;
+use crate::y_sort::{DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
 #[component(on_add = on_add_background)]
@@ -26,7 +25,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             Transform::from_translation(C_F_ENTRANCE_POS.extend(DEFAULT_Z)),
         ),
         CFEntrance,
-        YSort { z: Z_INDEX.mg },
+        YSort { z: z_indices::MIDGROUND },
     ));
 }
 

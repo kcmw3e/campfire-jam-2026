@@ -3,8 +3,7 @@ use bevy::sprite::Anchor;
 use bevy_easy_gif::*;
 
 use crate::background::on_add_background;
-use crate::constants::{DEFAULT_POS, DEFAULT_Z, Z_INDEX};
-use crate::y_sort::YSort;
+use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
 #[component(on_add = on_add_background)]
@@ -18,7 +17,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             Transform::from_translation(DEFAULT_POS.extend(DEFAULT_Z)),
         ),
         Campfire,
-        YSort { z: Z_INDEX.mg },
+        YSort { z: z_indices::MIDGROUND },
     ));
 }
 
