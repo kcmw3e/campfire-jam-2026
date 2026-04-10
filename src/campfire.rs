@@ -17,10 +17,10 @@ use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 #[component(on_add = on_add_background)]
 pub struct Campfire {
     /// The amount of fuel the campfire has left to burn.
-    fuel: u32,
+    fuel: f32,
 
     /// The maximum amount of fuel the campfire can hold.
-    capacity: u32,
+    capacity: f32,
 }
 
 impl Default for Campfire {
@@ -31,7 +31,7 @@ impl Default for Campfire {
 
 impl Campfire {
     /// The default amount of starting fuel for the campfire.
-    const STARTING_FUEL: u32 = 60; // 1 minute
+    const STARTING_FUEL: f32 = 60.; // 1 minute
 }
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
