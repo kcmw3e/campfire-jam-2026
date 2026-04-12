@@ -5,7 +5,6 @@ pub mod background;
 pub mod campfire;
 pub mod campsite;
 mod campsite_forest_entrance;
-pub mod constants;
 pub mod forest;
 pub mod input_bindings;
 pub mod player;
@@ -24,8 +23,7 @@ fn main() {
         .add_plugins(GifPlugin)
         .init_state::<GameState>()
         .init_resource::<input_bindings::KeyBinds>()
-        .add_systems(Startup, setup)
-        .add_systems(Startup, player::setup.after(setup))
+        .add_systems(Startup, player::setup)
         .add_systems(OnEnter(GameState::Forest), forest::setup)
         .add_systems(
             OnEnter(GameState::Campsite),
@@ -47,10 +45,6 @@ fn main() {
         )
         .add_systems(Update, (y_sort::y_sort, handle_quit))
         .run();
-}
-
-fn setup(mut commands: Commands) {
-    commands.spawn(Camera2d::default());
 }
 
 fn handle_quit(

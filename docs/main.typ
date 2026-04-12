@@ -7,9 +7,9 @@ by Casey Walker and Grace Xin
 The main objective of the game: _keep your campfire alive_.
 
 This is a 2.5D game where the player is plays a character that needs to keep the
-  campfire from dying.
+campfire from dying.
 The campfire will burn through its fuel over time, so the player must move
-  around the world and collect fuel to bring back to the campfire.
+around the world and collect fuel to bring back to the campfire.
 
 == Minimum goals
 
@@ -18,20 +18,35 @@ As a minimum for submission, we are planning to implement the following:
 - a campfire with a time-based deteriorating meter, which can be fed fuel
   - the meter is a static HUD element (e.g. a bar)
   - the campfire does not visually change based on the meter level---it will
-      always be the provided assets required by the game jam criteria
+    always be the provided assets required by the game jam criteria
 - collectable fuels that can be stored and fed to the campfire
   - sticks/twigs laying on the ground
   - wood logs that can be picked up from set locations
 - a character that can move around the world and interact with fuels and the
-    campfire
+  campfire
 - environments for the player to travel between
   - the campsite (where teh fire is located)
   - a forest, where sticks and logs can be gathered
 
+== Progress
+- #text(fill: green)[campfire]
+  - #text(fill: red)[meter]
+- #text(fill: red)[fuels] (note: either autogenerate locations or hardcode them, but this will probably come after environments are built)
+  - #text(fill: red)[sticks]
+  - #text(fill: red)[logs]
+- #text(fill: orange)[player] (replace temp png)
+  - #text(fill: orange)[movement] (gotta redo it all FUUUUUCK)
+- #text(fill: orange)[environments]
+  - #text(fill: orange)[campsite] (replace temp png)
+  - #text(fill: orange)[forest] (replace temp png, spawn at edge of screen, have entrance to teleport back to campsite)
+- #text(fill: red)[interactions]
+  - #text(fill: red)[pick up fuels]
+  - #text(fill: red)[feed campfire]
+
 === General tasks that can be parallelized
 
 In general, we will can divide the work into the following parallelizable
-  categories:
+categories:
 
 - campfire meter HUD
 - player interaction, such as moving and picking up items
