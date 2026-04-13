@@ -23,15 +23,53 @@ pub struct Campfire {
     capacity: f32,
 }
 
+/// This component causes the campfire to burn through its fuel based on a burn
+/// timer.
+#[derive(Component)]
+pub struct CampfireFuelBurn {
+    /// The timer that controls how often fuel is burned. Every time the timer
+    /// is exhausted, some fuel will be removed from the campfire.
+    burn_timer: Timer,
+}
+
 impl Default for Campfire {
     fn default() -> Self {
         Self { fuel: Self::STARTING_FUEL, capacity: Self::STARTING_FUEL }
     }
 }
 
+impl Default for CampfireFuelBurn {
+    fn default() -> Self {
+        Self {
+            burn_timer: Timer::from_seconds(
+                Self::BURN_RATE,
+                TimerMode::Repeating,
+            ),
+        }
+    }
+}
+
 impl Campfire {
     /// The default amount of starting fuel for the campfire.
     const STARTING_FUEL: f32 = 60.; // 1 minute
+}
+
+impl CampfireFuelBurn {
+    /// The default burn rate of the campfire, in seconds.
+    const BURN_RATE: f32 = 1.;
+
+    fn update(
+        query: Query<(&mut Campfire, &mut CampfireFuelBurn)>,
+        time: Res<Time>,
+    ) {
+        for (mut campfire, mut fuel_burn) in query {
+            fuel_burn.burn_timer.tick(time.delta());
+
+            if fuel_burn.burn_timer.just_finished() {
+                campfire.fuel -= 1.;
+            }
+        }
+    }
 }
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
