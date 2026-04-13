@@ -116,7 +116,6 @@ impl CampfireMeter {
                         ..default()
                     },
                     BackgroundColor(Self::FILL_COLOR),
-                    CampfireMeter { percent: 100.0 },
                 ));
             });
     }
