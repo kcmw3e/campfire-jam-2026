@@ -148,3 +148,15 @@ pub fn teardown(mut commands: Commands, query: Query<Entity, With<Campfire>>) {
         commands.entity(entity).despawn();
     }
 }
+
+pub struct CampfirePlugin;
+
+impl Plugin for CampfirePlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(
+            FixedUpdate,
+            (CampfireMeter::update, CampfireFuelBurn::update),
+        )
+        .add_observer(CampfireMeter::setup_meter);
+    }
+}

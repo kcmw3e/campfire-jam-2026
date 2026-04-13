@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 use bevy_easy_gif::*;
 
+use crate::campfire::CampfirePlugin;
+
 pub mod background;
 pub mod campfire;
 pub mod campsite;
@@ -46,6 +48,7 @@ fn main() {
                 .after(player::setup),
         )
         .add_systems(Update, (y_sort::y_sort, handle_quit))
+        .add_plugins(CampfirePlugin)
         .run();
 }
 
