@@ -32,6 +32,12 @@ pub struct CampfireFuelBurn {
     burn_timer: Timer,
 }
 
+/// The visual aspect of the campfire, showing how much fuel is left.
+#[derive(Component)]
+pub struct CampfireMeter {
+    percent: f32,
+}
+
 impl Default for Campfire {
     fn default() -> Self {
         Self { fuel: Self::STARTING_FUEL, capacity: Self::STARTING_FUEL }
@@ -46,6 +52,12 @@ impl Default for CampfireFuelBurn {
                 TimerMode::Repeating,
             ),
         }
+    }
+}
+
+impl Default for CampfireMeter {
+    fn default() -> Self {
+        Self { percent: 100. }
     }
 }
 
@@ -68,6 +80,53 @@ impl CampfireFuelBurn {
             if fuel_burn.burn_timer.just_finished() {
                 campfire.fuel -= 1.;
             }
+        }
+    }
+}
+
+impl CampfireMeter {
+    const WIDTH: Val = Val::Px(250.);
+    const HEIGHT: Val = Val::Px(40.);
+    const BORDER_WIDTH: UiRect = UiRect::all(Val::Px(3.0));
+
+    const FILL_COLOR: Color = Color::linear_rgb(0.3, 0.1, 0.1);
+    const BORDER_COLOR: Color = Color::linear_rgb(0.7, 0.7, 0.7);
+
+    /// Whenever a campfire is spawned, add a campfire meter to the it to
+    /// display the amount of fuel left.
+    fn setup_meter(add: On<Add, Campfire>, mut commands: Commands) {
+        commands
+            .entity(add.entity)
+            .insert((CampfireMeter::default(), CampfireFuelBurn::default()))
+            .insert((
+                Node {
+                    width: Self::WIDTH,
+                    height: Self::HEIGHT,
+                    border: Self::BORDER_WIDTH,
+                    ..default()
+                },
+                BackgroundColor(Color::BLACK),
+                BorderColor::all(Self::BORDER_COLOR),
+            ))
+            .with_children(|parent| {
+                parent.spawn((
+                    Node {
+                        width: Val::Percent(100.0),
+                        height: Val::Percent(100.0),
+                        ..default()
+                    },
+                    BackgroundColor(Self::FILL_COLOR),
+                    CampfireMeter { percent: 100.0 },
+                ));
+            });
+    }
+
+    /// Update the campfire meter's fill percent with the campfire's current
+    /// state.
+    fn update(query: Query<(&mut CampfireMeter, &Campfire, &mut Node)>) {
+        for (mut meter, campfire, mut node) in query {
+            meter.percent = campfire.fuel / campfire.capacity * 100.;
+            node.width = Val::Percent(meter.percent);
         }
     }
 }
