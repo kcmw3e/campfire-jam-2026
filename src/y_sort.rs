@@ -1,14 +1,15 @@
 use bevy::prelude::*;
 
-use crate::background::BACKGROUND_SIZE;
+use crate::BACKGROUND_SIZE;
 
 pub const DEFAULT_POS: Vec2 = Vec2::new(0., 0.);
 pub const DEFAULT_Z: f32 = 0.;
 
 pub mod z_indices {
-  pub const BACKGROUND: f32 = 0.;
-  pub const MIDGROUND: f32 = 1.;
-  pub const FOREGROUND: f32 = 2.;
+    pub const BACKDROP: f32 = 0.;
+    pub const ENTRANCE: f32 = 1.;
+    pub const MIDGROUND: f32 = 2.;
+    pub const FOREGROUND: f32 = 3.;
 }
 
 #[derive(Component)]

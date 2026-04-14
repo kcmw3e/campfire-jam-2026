@@ -13,14 +13,10 @@ pub struct Player;
 const PLAYER_SPEED: f32 = 500.;
 pub const PLAYER_SIZE: Vec2 = Vec2::new(30., 50.);
 const PLAYER_STARTING_POS: Vec2 = Vec2::new(-PLAYER_SIZE.x, DEFAULT_POS.y);
-const FOREST_PLAYER_POS: Vec2 = Vec2::new(
-    -FOREST_SIZE.x / 2. + ENTRANCE_SIZE.x,
-    DEFAULT_POS.y,
-);
-const CAMPSITE_PLAYER_POS: Vec2 = Vec2::new(
-    CAMPSITE_SIZE.x / 2. - ENTRANCE_SIZE.x,
-    DEFAULT_POS.y,
-);
+const FOREST_PLAYER_POS: Vec2 =
+    Vec2::new(-FOREST_SIZE.x / 2. + ENTRANCE_SIZE.x, DEFAULT_POS.y);
+const CAMPSITE_PLAYER_POS: Vec2 =
+    Vec2::new(CAMPSITE_SIZE.x / 2. - ENTRANCE_SIZE.x, DEFAULT_POS.y);
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands

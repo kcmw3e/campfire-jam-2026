@@ -1,14 +1,12 @@
 use bevy::prelude::*;
 
 use crate::GameState;
-use crate::background::on_add_background;
 use crate::campsite::CAMPSITE_SIZE;
 use crate::forest::FOREST_SIZE;
 use crate::player::Player;
 use crate::y_sort::{DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
-#[component(on_add = on_add_background)]
 pub struct Entrance;
 
 pub const ENTRANCE_SIZE: Vec2 = Vec2::new(75., 125.);
@@ -41,7 +39,7 @@ pub fn setup(
             Transform::from_translation(entrance_pos.extend(DEFAULT_Z)),
         ),
         Entrance,
-        YSort { z: z_indices::MIDGROUND },
+        YSort { z: z_indices::ENTRANCE },
     ));
 }
 
