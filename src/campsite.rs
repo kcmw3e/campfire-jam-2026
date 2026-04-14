@@ -1,10 +1,9 @@
 use bevy::prelude::*;
 
-use crate::background::{BACKGROUND_SIZE, on_add_background};
+use crate::background::BACKGROUND_SIZE;
 use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
-#[component(on_add = on_add_background)]
 pub struct Campsite;
 
 pub const CAMPSITE_SIZE: Vec2 = BACKGROUND_SIZE;

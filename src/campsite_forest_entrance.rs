@@ -1,13 +1,11 @@
 use bevy::prelude::*;
 
 use crate::GameState;
-use crate::background::on_add_background;
 use crate::campsite::CAMPSITE_SIZE;
 use crate::player::{PLAYER_SIZE, Player};
 use crate::y_sort::{DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
-#[component(on_add = on_add_background)]
 pub struct CFEntrance;
 
 pub const ENTRANCE_SIZE: Vec2 = Vec2::new(75., 125.);
