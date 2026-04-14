@@ -39,7 +39,7 @@ pub fn setup(
             Transform::from_translation(entrance_pos.extend(DEFAULT_Z)),
         ),
         Entrance,
-        YSort { z: z_indices::MIDGROUND },
+        YSort { z: z_indices::ENTRANCE },
     ));
 }
 

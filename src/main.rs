@@ -1,7 +1,6 @@
 use bevy::prelude::*;
 use bevy_easy_gif::*;
 
-pub mod background;
 pub mod campfire;
 pub mod campsite;
 pub mod entrance;
@@ -9,6 +8,8 @@ pub mod forest;
 pub mod input_bindings;
 pub mod player;
 pub mod y_sort;
+
+pub const BACKGROUND_SIZE: Vec2 = Vec2::new(3000., 1650.);
 
 #[derive(States, Debug, Clone, PartialEq, Eq, Hash, Default)]
 pub enum GameState {

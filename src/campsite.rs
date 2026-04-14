@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::background::BACKGROUND_SIZE;
+use crate::BACKGROUND_SIZE;
 use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
@@ -19,7 +19,7 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             Transform::from_translation(DEFAULT_POS.extend(DEFAULT_Z)),
         ),
         Campsite,
-        YSort { z: z_indices::BACKGROUND },
+        YSort { z: z_indices::BACKDROP },
     ));
 }
 
