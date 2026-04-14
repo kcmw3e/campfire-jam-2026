@@ -6,6 +6,7 @@ pub mod campsite;
 pub mod entrance;
 pub mod forest;
 pub mod input_bindings;
+pub mod movement;
 pub mod player;
 pub mod y_sort;
 
@@ -48,9 +49,18 @@ fn main() {
         )
         .add_systems(
             FixedUpdate,
-            (player::movement, entrance::check_entrance).after(player::setup),
+            (movement::set_velocity, entrance::check_entrance)
+                .after(player::setup),
         )
-        .add_systems(Update, (y_sort::y_sort, handle_quit))
+        .add_systems(
+            Update,
+            (
+                movement::interpolate_transform,
+                movement::set_position,
+                y_sort::y_sort,
+                handle_quit,
+            ),
+        )
         .run();
 }
 
