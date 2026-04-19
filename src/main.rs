@@ -7,7 +7,6 @@ pub mod background;
 pub mod campfire;
 pub mod campsite;
 mod campsite_forest_entrance;
-pub mod constants;
 pub mod forest;
 pub mod input_bindings;
 pub mod player;
