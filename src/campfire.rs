@@ -122,10 +122,17 @@ impl CampfireMeter {
 
     /// Update the campfire meter's fill percent with the campfire's current
     /// state.
-    fn update(query: Query<(&mut CampfireMeter, &Campfire, &mut Node)>) {
-        for (mut meter, campfire, mut node) in query {
+    fn update(
+        query: Query<(&mut CampfireMeter, &Campfire, &Children), With<Node>>,
+        mut fill_query: Query<&mut Node>,
+    ) {
+        for (mut meter, campfire, children) in query {
             meter.percent = campfire.fuel / campfire.capacity * 100.;
-            node.width = Val::Percent(meter.percent);
+            if let Some(&fill) = children.first() {
+                if let Ok(mut fill) = fill_query.get_mut(fill) {
+                    fill.width = Val::Percent(meter.percent);
+                }
+            }
         }
     }
 }
