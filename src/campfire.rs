@@ -87,7 +87,7 @@ impl CampfireFuelBurn {
 impl CampfireMeter {
     const WIDTH: Val = Val::Px(250.);
     const HEIGHT: Val = Val::Px(40.);
-    const BORDER_WIDTH: UiRect = UiRect::all(Val::Px(3.0));
+    const BORDER_WIDTH: UiRect = UiRect::all(Val::Px(3.));
 
     const FILL_COLOR: Color = Color::linear_rgb(0.3, 0.1, 0.1);
     const BORDER_COLOR: Color = Color::linear_rgb(0.7, 0.7, 0.7);
