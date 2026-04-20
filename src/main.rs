@@ -5,6 +5,7 @@ pub mod campfire;
 pub mod campsite;
 pub mod entrance;
 pub mod forest;
+pub mod fuel;
 pub mod input_bindings;
 pub mod movement;
 pub mod player;
@@ -28,7 +29,12 @@ fn main() {
         .add_systems(Startup, player::setup)
         .add_systems(
             OnEnter(GameState::Forest),
-            (entrance::setup, forest::setup, player::enter_forest),
+            (
+                entrance::setup,
+                forest::setup,
+                fuel::Fuel::setup,
+                player::enter_forest,
+            ),
         )
         .add_systems(
             OnEnter(GameState::Campsite),
@@ -41,7 +47,7 @@ fn main() {
         )
         .add_systems(
             OnExit(GameState::Forest),
-            (entrance::teardown, forest::teardown),
+            (entrance::teardown, forest::teardown, fuel::Fuel::teardown),
         )
         .add_systems(
             OnExit(GameState::Campsite),
