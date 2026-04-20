@@ -94,7 +94,7 @@ impl CampfireMeter {
 
     /// Whenever a campfire is spawned, add a campfire meter to the it to
     /// display the amount of fuel left.
-    fn setup_meter(add: On<Add, Campfire>, mut commands: Commands) {
+    fn setup(add: On<Add, Campfire>, mut commands: Commands) {
         commands
             .entity(add.entity)
             .insert((CampfireMeter::default(), CampfireFuelBurn::default()))
@@ -163,6 +163,6 @@ impl Plugin for CampfirePlugin {
             FixedUpdate,
             (CampfireMeter::update, CampfireFuelBurn::update),
         )
-        .add_observer(CampfireMeter::setup_meter);
+        .add_observer(CampfireMeter::setup);
     }
 }
