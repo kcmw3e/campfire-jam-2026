@@ -30,16 +30,12 @@ fn main() {
         .add_systems(OnEnter(GameState::Forest), forest::setup)
         .add_systems(
             OnEnter(GameState::Campsite),
-            (campsite::setup, campfire::setup, campsite_forest_entrance::setup),
+            (campsite::setup, campsite_forest_entrance::setup),
         )
         .add_systems(OnExit(GameState::Forest), forest::teardown)
         .add_systems(
             OnExit(GameState::Campsite),
-            (
-                campsite::teardown,
-                campfire::teardown,
-                campsite_forest_entrance::teardown,
-            ),
+            (campsite::teardown, campsite_forest_entrance::teardown),
         )
         .add_systems(
             FixedUpdate,
