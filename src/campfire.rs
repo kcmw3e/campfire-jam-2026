@@ -38,29 +38,6 @@ pub struct CampfireMeter {
     percent: f32,
 }
 
-impl Default for Campfire {
-    fn default() -> Self {
-        Self { fuel: Self::STARTING_FUEL, capacity: Self::STARTING_FUEL }
-    }
-}
-
-impl Default for CampfireFuelBurn {
-    fn default() -> Self {
-        Self {
-            burn_timer: Timer::from_seconds(
-                Self::BURN_RATE,
-                TimerMode::Repeating,
-            ),
-        }
-    }
-}
-
-impl Default for CampfireMeter {
-    fn default() -> Self {
-        Self { percent: 100. }
-    }
-}
-
 impl Campfire {
     /// The default amount of starting fuel for the campfire.
     const STARTING_FUEL: f32 = 60.; // 1 minute
@@ -164,5 +141,28 @@ impl Plugin for CampfirePlugin {
             (CampfireMeter::update, CampfireFuelBurn::update),
         )
         .add_observer(CampfireMeter::setup);
+    }
+}
+
+impl Default for Campfire {
+    fn default() -> Self {
+        Self { fuel: Self::STARTING_FUEL, capacity: Self::STARTING_FUEL }
+    }
+}
+
+impl Default for CampfireFuelBurn {
+    fn default() -> Self {
+        Self {
+            burn_timer: Timer::from_seconds(
+                Self::BURN_RATE,
+                TimerMode::Repeating,
+            ),
+        }
+    }
+}
+
+impl Default for CampfireMeter {
+    fn default() -> Self {
+        Self { percent: 100. }
     }
 }
