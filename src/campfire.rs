@@ -5,6 +5,18 @@ use bevy_easy_gif::*;
 use crate::background::on_add_background;
 use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
+pub struct CampfirePlugin;
+
+impl Plugin for CampfirePlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(
+            FixedUpdate,
+            (CampfireMeter::update, CampfireFuelBurn::update),
+        )
+        .add_observer(CampfireMeter::setup);
+    }
+}
+
 /// The campfire is the central part of the game that the player must interact
 /// with. It will burn through fuel over time.
 ///
@@ -129,18 +141,6 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 pub fn teardown(mut commands: Commands, query: Query<Entity, With<Campfire>>) {
     for entity in query.iter() {
         commands.entity(entity).despawn();
-    }
-}
-
-pub struct CampfirePlugin;
-
-impl Plugin for CampfirePlugin {
-    fn build(&self, app: &mut App) {
-        app.add_systems(
-            FixedUpdate,
-            (CampfireMeter::update, CampfireFuelBurn::update),
-        )
-        .add_observer(CampfireMeter::setup);
     }
 }
 
