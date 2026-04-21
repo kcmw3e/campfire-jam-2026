@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 use bevy_easy_gif::*;
 
+use crate::campfire::CampfirePlugin;
+
 pub mod background;
 pub mod campfire;
 pub mod campsite;
@@ -32,7 +34,7 @@ fn main() {
             OnEnter(GameState::Campsite),
             (
                 campsite::setup,
-                campfire::setup,
+                campfire::Campfire::setup,
                 entrance::setup,
                 player::enter_campsite,
             ),
@@ -43,13 +45,18 @@ fn main() {
         )
         .add_systems(
             OnExit(GameState::Campsite),
-            (campsite::teardown, campfire::teardown, entrance::teardown),
+            (
+                campsite::teardown,
+                campfire::Campfire::teardown,
+                entrance::teardown,
+            ),
         )
         .add_systems(
             FixedUpdate,
             (player::movement, entrance::check_entrance).after(player::setup),
         )
         .add_systems(Update, (y_sort::y_sort, handle_quit))
+        .add_plugins(CampfirePlugin)
         .run();
 }
 
