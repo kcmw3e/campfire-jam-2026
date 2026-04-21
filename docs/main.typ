@@ -28,6 +28,23 @@ As a minimum for submission, we are planning to implement the following:
   - the campsite (where teh fire is located)
   - a forest, where sticks and logs can be gathered
 
+== Progress
+- #text(fill: green)[campfire]
+  - #text(fill: red)[meter]
+- #text(fill: red)[fuels] (note: either autogenerate locations or hardcode them,
+    but this will probably come after environments are built)
+  - #text(fill: red)[sticks]
+  - #text(fill: red)[logs]
+- #text(fill: orange)[player] (replace temp png)
+  - #text(fill: orange)[movement] (gotta redo it all FUUUUUCK)
+- #text(fill: orange)[environments]
+  - #text(fill: orange)[campsite] (replace temp png)
+  - #text(fill: orange)[forest] (replace temp png, spawn at edge of screen, have
+      entrance to teleport back to campsite)
+- #text(fill: red)[interactions]
+  - #text(fill: red)[pick up fuels]
+  - #text(fill: red)[feed campfire]
+
 === General tasks that can be parallelized
 
 In general, we will can divide the work into the following parallelizable
