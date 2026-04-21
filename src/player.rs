@@ -14,11 +14,11 @@ const PLAYER_SPEED: f32 = 500.;
 pub const PLAYER_SIZE: Vec2 = Vec2::new(30., 50.);
 const PLAYER_STARTING_POS: Vec2 = Vec2::new(-PLAYER_SIZE.x, DEFAULT_POS.y);
 const FOREST_PLAYER_POS: Vec2 = Vec2::new(
-    -FOREST_SIZE.x / 2. + ENTRANCE_SIZE.x,
+    -FOREST_SIZE.x / 2. + ENTRANCE_SIZE.x + PLAYER_SIZE.x / 2.,
     DEFAULT_POS.y,
 );
 const CAMPSITE_PLAYER_POS: Vec2 = Vec2::new(
-    CAMPSITE_SIZE.x / 2. - ENTRANCE_SIZE.x,
+    CAMPSITE_SIZE.x / 2. - ENTRANCE_SIZE.x - PLAYER_SIZE.x / 2.,
     DEFAULT_POS.y,
 );
 

@@ -4,7 +4,7 @@ use crate::GameState;
 use crate::background::on_add_background;
 use crate::campsite::CAMPSITE_SIZE;
 use crate::forest::FOREST_SIZE;
-use crate::player::Player;
+use crate::player::{Player, PLAYER_SIZE};
 use crate::y_sort::{DEFAULT_Z, YSort, z_indices};
 
 #[derive(Component)]
@@ -61,8 +61,9 @@ pub fn check_entrance(
     let player_pos = player_transform.translation;
     let entrance_pos = entrance_transform.translation;
 
+    let half_player = PLAYER_SIZE / 2.;
     let half_entrance = ENTRANCE_SIZE / 2.;
-    let in_x = (player_pos.x - entrance_pos.x).abs() < half_entrance.x;
+    let in_x = (player_pos.x - entrance_pos.x).abs() < half_player.x + half_entrance.x;
     let in_y = (player_pos.y - entrance_pos.y).abs() < half_entrance.y;
 
     let new_state = match game_state.as_ref().get() {
