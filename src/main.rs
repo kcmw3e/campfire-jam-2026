@@ -6,7 +6,7 @@ use crate::campfire::CampfirePlugin;
 pub mod background;
 pub mod campfire;
 pub mod campsite;
-mod campsite_forest_entrance;
+pub mod entrance;
 pub mod forest;
 pub mod input_bindings;
 pub mod player;
@@ -26,20 +26,34 @@ fn main() {
         .init_state::<GameState>()
         .init_resource::<input_bindings::KeyBinds>()
         .add_systems(Startup, player::setup)
-        .add_systems(OnEnter(GameState::Forest), forest::setup)
+        .add_systems(
+            OnEnter(GameState::Forest),
+            (entrance::setup, forest::setup, player::enter_forest),
+        )
         .add_systems(
             OnEnter(GameState::Campsite),
-            (campsite::setup, campsite_forest_entrance::setup),
+            (
+                campsite::setup,
+                campfire::Campfire::setup,
+                entrance::setup,
+                player::enter_campsite,
+            ),
         )
-        .add_systems(OnExit(GameState::Forest), forest::teardown)
+        .add_systems(
+            OnExit(GameState::Forest),
+            (entrance::teardown, forest::teardown),
+        )
         .add_systems(
             OnExit(GameState::Campsite),
-            (campsite::teardown, campsite_forest_entrance::teardown),
+            (
+                campsite::teardown,
+                campfire::Campfire::teardown,
+                entrance::teardown,
+            ),
         )
         .add_systems(
             FixedUpdate,
-            (player::movement, campsite_forest_entrance::check_entrance)
-                .after(player::setup),
+            (player::movement, entrance::check_entrance).after(player::setup),
         )
         .add_systems(Update, (y_sort::y_sort, handle_quit))
         .add_plugins(CampfirePlugin)

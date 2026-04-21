@@ -1,11 +1,9 @@
 use bevy::prelude::*;
 use bevy::sprite::Anchor;
-use bevy::window::PrimaryWindow;
 
-use crate::GameState;
-use crate::background::{BACKGROUND_SIZE, Background};
-use crate::campsite::Campsite;
-use crate::forest::Forest;
+use crate::campsite::CAMPSITE_SIZE;
+use crate::entrance::ENTRANCE_SIZE;
+use crate::forest::FOREST_SIZE;
 use crate::input_bindings::KeyBinds;
 use crate::y_sort::{DEFAULT_POS, DEFAULT_Z, YSort, z_indices};
 
@@ -15,6 +13,14 @@ pub struct Player;
 const PLAYER_SPEED: f32 = 500.;
 pub const PLAYER_SIZE: Vec2 = Vec2::new(30., 50.);
 const PLAYER_STARTING_POS: Vec2 = Vec2::new(-PLAYER_SIZE.x, DEFAULT_POS.y);
+const FOREST_PLAYER_POS: Vec2 = Vec2::new(
+    -FOREST_SIZE.x / 2. + ENTRANCE_SIZE.x + PLAYER_SIZE.x / 2.,
+    DEFAULT_POS.y,
+);
+const CAMPSITE_PLAYER_POS: Vec2 = Vec2::new(
+    CAMPSITE_SIZE.x / 2. - ENTRANCE_SIZE.x - PLAYER_SIZE.x / 2.,
+    DEFAULT_POS.y,
+);
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands
@@ -34,6 +40,16 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             YSort { z: z_indices::MIDGROUND },
         ))
         .with_child(Camera2d::default());
+}
+
+pub fn enter_forest(mut player_query: Query<&mut Transform, With<Player>>) {
+    let Ok(mut player) = player_query.single_mut() else { return };
+    player.translation = FOREST_PLAYER_POS.extend(DEFAULT_Z);
+}
+
+pub fn enter_campsite(mut player_query: Query<&mut Transform, With<Player>>) {
+    let Ok(mut player) = player_query.single_mut() else { return };
+    player.translation = CAMPSITE_PLAYER_POS.extend(DEFAULT_Z);
 }
 
 /// Returns a direction vector based on the currently pressed movement keys (WASD or arrow keys)

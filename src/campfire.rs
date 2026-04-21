@@ -57,7 +57,7 @@ impl Campfire {
     /// The default amount of starting fuel for the campfire.
     const STARTING_FUEL: f32 = 60.; // 1 minute
 
-    fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         commands.spawn((
             (
                 Gif {
@@ -71,7 +71,7 @@ impl Campfire {
         ));
     }
 
-    fn teardown(mut commands: Commands, query: Query<Entity, With<Campfire>>) {
+    pub fn teardown(mut commands: Commands, query: Query<Entity, With<Campfire>>) {
         for entity in query.iter() {
             commands.entity(entity).despawn();
         }
@@ -82,7 +82,7 @@ impl CampfireFuelBurn {
     /// The default burn rate of the campfire, in seconds.
     const BURN_RATE: f32 = 1.;
 
-    fn update(
+    pub fn update(
         query: Query<(&mut Campfire, &mut CampfireFuelBurn)>,
         time: Res<Time>,
     ) {
